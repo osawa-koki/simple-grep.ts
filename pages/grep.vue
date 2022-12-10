@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NuxtLink to="/grep">GREP</NuxtLink>
+    <h1>GREP</h1>
   </div>
 </template>
 
@@ -8,6 +8,6 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'IndexPage',
+  name: 'GrepPage',
 })
 </script>
