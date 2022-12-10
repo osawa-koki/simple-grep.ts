@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <Explorer name="AAA" />
+  <div id="ExplorerDiv">
+    <h1>GREP</h1>
+    <p>{{ name }}</p>
   </div>
 </template>
 
@@ -9,5 +10,6 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'GrepPage',
+  props: ["name"],
 });
 </script>
