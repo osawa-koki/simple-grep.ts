@@ -1,3 +1,6 @@
+const PROJECT_NAME = 'simple-grep.ts';
+const PRODUCTION_BASE_PATH = `/${PROJECT_NAME}/`;
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -40,4 +43,16 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  // 出力先ディレクトリを変更
+  generate: {
+    dir: "docs"
+  },
+
+  // GitHub Pages 用の設定
+  router: {
+    base: process.env.NODE_ENV === 'production'
+      ? PRODUCTION_BASE_PATH
+      : '/'
+  },
 }
