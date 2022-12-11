@@ -51,7 +51,7 @@ export default Vue.extend({
         } as FileWrapper;
         this.files.push(file);
       }
-      this.files.sort((a, b) => a.file.webkitRelativePath.localeCompare(b.file.webkitRelativePath));
+      this.files.sort((a, b) => a.file.name.localeCompare(b.file.name));
     },
     select_dir(): void {
       const DirSelector = this.$refs.dir_selector as HTMLInputElement;
