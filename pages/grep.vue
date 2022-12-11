@@ -8,7 +8,7 @@
       <b-button variant="outline-success">Result</b-button>
     </b-button-group>
     <div id="MainFrame">
-      <SearchOn v-if="isTabGrep" />
+      <SearchOn v-if="isTabGrep" @grep_start="grep_start" />
     </div>
   </div>
 </template>
@@ -46,6 +46,9 @@ export default Vue.extend({
     select_dir(): void {
       const DirSelector = this.$refs.dir_selector as HTMLInputElement;
       DirSelector.click();
+    },
+    grep_start(TargetExtentions: string[]): void {
+      console.log(TargetExtentions);
     },
   },
 });

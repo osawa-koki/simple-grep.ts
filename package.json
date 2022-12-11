@@ -16,11 +16,13 @@
     "test:e2e": "cross-env TEST=e2e ava ./test/e2e/**/*"
   },
   "dependencies": {
+    "@types/vue-select": "^3.16.2",
     "bootstrap": "^4.6.2",
     "bootstrap-vue": "^2.22.0",
     "core-js": "^3.25.3",
     "nuxt": "^2.15.8",
     "vue": "^2.7.10",
+    "vue-select": "^3.20.0",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10"
   },
