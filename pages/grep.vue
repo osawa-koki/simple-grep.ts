@@ -2,13 +2,14 @@
   <div>
     <input ref="dir_selector" type="file" class="hidden" webkitdirectory @change="handleDirSelect" />
     <b-button id="DirSelectButton" variant="outline-primary" @click="select_dir">ディレクトリを選択</b-button>
-    <Explorer id="ExplorerContainer" :files="files" />
+    <Explorer id="ExplorerContainer" :files="files" @go_viewer="go_viewer" />
     <b-button-group id="TabSwitcher">
       <b-button variant="outline-success" @click="GrepOn">Grep</b-button>
       <b-button variant="outline-success" @click="ResultOn">Result</b-button>
     </b-button-group>
     <div id="MainFrame">
       <SearchOn v-if="isTabGrep" @grep_start="grep_start" />
+      <FileViewer v-else :content="result_content" />
     </div>
   </div>
 </template>
@@ -28,9 +29,10 @@ export default Vue.extend({
     return {
       files: [] as FileWrapper[],
       tab_state: TabState.Grep as TabState,
-      target_string: '',
-      is_regex: true,
+      target_string: '' as string,
+      is_regex: true as boolean,
       target_extentions: [] as string[],
+      result_content: '' as string,
     };
   },
   computed: {
@@ -85,6 +87,10 @@ export default Vue.extend({
           }
         });
       });
+    },
+    async go_viewer(file: FileWrapper): Promise<void> {
+      this.ResultOn();
+      this.result_content = await (await file.file.text()).replace(/</g, "&lt;").replace(/>/g, "&gt;");
     },
   },
 });

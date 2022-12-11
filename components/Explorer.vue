@@ -1,6 +1,6 @@
 <template>
   <div id="ExplorerDiv">
-    <div v-for="file in files" :key="file.file.webkitRelativePath" :class="[((file.flag) ? 'on' : 'off') + ' File']">{{ file.file.name }}</div>
+    <div v-for="file in files" :key="file.file.webkitRelativePath" :class="[((file.flag) ? 'on' : 'off') + ' File']" @click="go_viewer(file)">{{ file.file.name }}</div>
   </div>
 </template>
 
@@ -14,6 +14,14 @@ export default Vue.extend({
     files: {
       type: Array as () => FileWrapper[],
       required: true,
+    },
+  },
+  methods: {
+    go_viewer(file: FileWrapper): void {
+      this.$emit('go_viewer', {
+        file: file.file,
+        flag: file.flag,
+      } as FileWrapper);
     },
   },
 });
