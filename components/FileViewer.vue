@@ -1,6 +1,8 @@
 <template>
   <div>
+    <!-- eslint-disable-next-line vue/no-v-html -->
     <div id="Viewer" v-html="content"></div>
+    <!--eslint-enable-->
   </div>
 </template>
 
@@ -11,11 +13,9 @@ export default Vue.extend({
   name: 'FileViewer',
   props: {
     content: {
-      type: '' as string,
+      type: String,
       required: true,
     },
-  },
-  methods: {
   },
 });
 </script>
