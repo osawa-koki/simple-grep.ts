@@ -1,1 +1,0 @@
-window.__NUXT__=(function(a){return {staticAssetsBase:"\u002Fsimple-grep.ts\u002F_nuxt\u002Fstatic\u002F1670754913",layout:"default",error:a,serverRendered:true,routePath:"\u002Fgrep",config:{_app:{basePath:"\u002Fsimple-grep.ts\u002F",assetsPath:"\u002Fsimple-grep.ts\u002F_nuxt\u002F",cdnURL:a}}}}(null));
