@@ -15,6 +15,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { FileWrapper } from '@/src/interface';
 
 enum TabState {
   Grep,
@@ -25,7 +26,7 @@ export default Vue.extend({
   name: 'GrepPage',
   data() {
     return {
-      files: [] as File[],
+      files: [] as FileWrapper[],
       tab_state: TabState.Grep as TabState,
     };
   },
@@ -37,11 +38,15 @@ export default Vue.extend({
   methods: {
     handleDirSelect(event: any): void {
       const files = event.target.files;
-      this.files = [] as File[];
+      this.files = [] as FileWrapper[];
       for (let i = 0; i < files.length; i++) {
-        this.files.push(files[i]);
+        const file = {
+          file: files[i],
+          flag: false,
+        } as FileWrapper;
+        this.files.push(file);
       }
-      this.files.sort((a, b) => a.webkitRelativePath.localeCompare(b.webkitRelativePath));
+      this.files.sort((a, b) => a.file.webkitRelativePath.localeCompare(b.file.webkitRelativePath));
     },
     select_dir(): void {
       const DirSelector = this.$refs.dir_selector as HTMLInputElement;
@@ -54,7 +59,14 @@ export default Vue.extend({
       this.tab_state = TabState.Result;
     },
     grep_start(TargetExtentions: string[]): void {
-      console.log(TargetExtentions);
+      this.files.forEach((file) => {
+        const ext = file.file.name.split('.').pop();
+        if (ext === undefined) {
+          file.flag = false;
+        } else {
+          file.flag = TargetExtentions.includes(ext);
+        }
+      });
     },
   },
 });
