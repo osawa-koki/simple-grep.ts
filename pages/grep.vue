@@ -4,8 +4,8 @@
     <b-button id="DirSelectButton" variant="outline-primary" @click="select_dir">ディレクトリを選択</b-button>
     <Explorer id="ExplorerContainer" :files="files" />
     <b-button-group id="TabSwitcher">
-      <b-button variant="outline-success">Grep</b-button>
-      <b-button variant="outline-success">Result</b-button>
+      <b-button variant="outline-success" @click="GrepOn">Grep</b-button>
+      <b-button variant="outline-success" @click="ResultOn">Result</b-button>
     </b-button-group>
     <div id="MainFrame">
       <SearchOn v-if="isTabGrep" @grep_start="grep_start" />
@@ -46,6 +46,12 @@ export default Vue.extend({
     select_dir(): void {
       const DirSelector = this.$refs.dir_selector as HTMLInputElement;
       DirSelector.click();
+    },
+    GrepOn(): void {
+      this.tab_state = TabState.Grep;
+    },
+    ResultOn(): void {
+      this.tab_state = TabState.Result;
     },
     grep_start(TargetExtentions: string[]): void {
       console.log(TargetExtentions);
