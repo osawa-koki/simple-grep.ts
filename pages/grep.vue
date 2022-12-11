@@ -90,7 +90,29 @@ export default Vue.extend({
     },
     async go_viewer(file: FileWrapper): Promise<void> {
       this.ResultOn();
-      this.result_content = await (await file.file.text()).replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      // .replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      let text = (await file.file.text()).replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      // 色付け
+      if (this.target_string === '') {
+        this.result_content = text;
+        return;
+      }
+      if (this.is_regex) {
+        const regex = new RegExp(this.target_string, 'g');
+        const result = text.match(regex);
+        if (result) {
+          result.forEach((str) => {
+            const regex = new RegExp(str, 'g');
+            text = text.replace(regex, `<span style="background-color: yellow;">${str}</span>`);
+          });
+        }
+      } else {
+        // eslint-disable-next-line no-lonely-if
+        if (text.includes(this.target_string)) {
+          text = text.replace(this.target_string, `<span style="background-color: yellow;">${this.target_string}</span>`);
+        }
+      }
+      this.result_content = text;
     },
   },
 });
