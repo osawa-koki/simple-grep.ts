@@ -7,8 +7,8 @@
       <b-button variant="outline-success">Grep</b-button>
       <b-button variant="outline-success">Result</b-button>
     </b-button-group>
-    <div>
-      
+    <div id="MainFrame">
+      <SearchOn v-if="isTabGrep" />
     </div>
   </div>
 </template>
@@ -26,8 +26,13 @@ export default Vue.extend({
   data() {
     return {
       files: [] as File[],
-      tab_state: TabState.Grep,
+      tab_state: TabState.Grep as TabState,
     };
+  },
+  computed: {
+    isTabGrep(): boolean {
+      return this.tab_state === TabState.Grep;
+    },
   },
   methods: {
     handleDirSelect(event: any): void {
@@ -67,5 +72,16 @@ export default Vue.extend({
   position: fixed;
   top: 10px;
   right: 10px;
+}
+#MainFrame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 70px;
+  bottom: 0;
+  left: 300px;
+  right: 0;
+  border: 1px solid gray;
 }
 </style>
