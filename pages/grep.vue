@@ -1,7 +1,8 @@
 <template>
   <div>
-    <input type="file" webkitdirectory @change="handleDirSelect" />
-    <Explorer :files="files" />
+    <input ref="dir_selector" type="file" class="hidden" webkitdirectory @change="handleDirSelect" />
+    <b-button variant="outline-primary" @click="select_dir">ディレクトリを選択</b-button>
+    <Explorer v-if="0 < files.length" :files="files" />
   </div>
 </template>
 
@@ -24,6 +25,19 @@ export default Vue.extend({
       }
       this.files.sort((a, b) => a.webkitRelativePath.localeCompare(b.webkitRelativePath));
     },
+    select_dir(): void {
+      const DirSelector = this.$refs.dir_selector as HTMLInputElement;
+      DirSelector.click();
+    },
   },
 });
 </script>
+
+<style scoped>
+.hidden {
+  display: none;
+}
+button {
+  margin: 1rem;
+}
+</style>

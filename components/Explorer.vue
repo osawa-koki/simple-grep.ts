@@ -1,7 +1,6 @@
 <template>
   <div id="ExplorerDiv">
-    <div v-for="file in files" :key="file.webkitRelativePath" class="File">
-    <div>{{ file.name }}</div></div>
+    <div v-for="file in files" :key="file.webkitRelativePath" class="File">{{ file.name }}</div>
   </div>
 </template>
 
@@ -18,3 +17,23 @@ export default Vue.extend({
   },
 });
 </script>
+
+<style scoped>
+#ExplorerDiv {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 1rem 0;
+  padding: 0;
+  max-width: 250px;
+  overflow-x: auto;
+  border: 3px double gray;
+}
+.File {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.File:hover {
+  background-color: lightgray;
+}
+</style>
