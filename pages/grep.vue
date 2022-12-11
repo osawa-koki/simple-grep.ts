@@ -28,6 +28,9 @@ export default Vue.extend({
     return {
       files: [] as FileWrapper[],
       tab_state: TabState.Grep as TabState,
+      target_string: '',
+      is_regex: true,
+      target_extentions: [] as string[],
     };
   },
   computed: {
@@ -59,6 +62,9 @@ export default Vue.extend({
       this.tab_state = TabState.Result;
     },
     grep_start(TargetString: string, IsRegex: boolean, TargetExtentions: string[]): void {
+      this.target_string = TargetString;
+      this.is_regex = IsRegex;
+      this.target_extentions = TargetExtentions;
       this.files.forEach((file) => {
         file.flag = false;
         if (TargetExtentions.includes(file.file.name.split('.').pop() as string) === false) {
