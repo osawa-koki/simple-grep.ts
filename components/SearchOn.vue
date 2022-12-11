@@ -4,11 +4,11 @@
       <tbody>
         <tr>
           <th>検索対象文字列</th>
-          <td><input type="text" /></td>
+          <td><input v-model="target_string" type="text" /></td>
         </tr>
         <tr>
           <th>正規表現を使用</th>
-          <td><input type="checkbox" checked /></td>
+          <td><input v-model="is_regex" type="checkbox" /></td>
         </tr>
         <tr>
           <th>検索対象ファイル拡張子</th>
@@ -39,7 +39,9 @@ export default Vue.extend({
   data() {
     return {
       options: extentionList,
-      selected_values: initialExtentionList
+      selected_values: initialExtentionList,
+      target_string: "",
+      is_regex: true,
     };
   },
   methods: {
@@ -48,7 +50,7 @@ export default Vue.extend({
     },
     grep_start(): void {
       const TargetExtentions = [...this.selected_values];
-      this.$emit('grep_start', TargetExtentions);
+      this.$emit('grep_start', this.target_string, this.is_regex, TargetExtentions);
     },
   },
 });

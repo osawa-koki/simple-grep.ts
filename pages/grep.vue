@@ -58,14 +58,26 @@ export default Vue.extend({
     ResultOn(): void {
       this.tab_state = TabState.Result;
     },
-    grep_start(TargetExtentions: string[]): void {
+    grep_start(TargetString: string, IsRegex: boolean, TargetExtentions: string[]): void {
       this.files.forEach((file) => {
-        const ext = file.file.name.split('.').pop();
-        if (ext === undefined) {
-          file.flag = false;
-        } else {
-          file.flag = TargetExtentions.includes(ext);
+        file.flag = false;
+        if (TargetExtentions.includes(file.file.name.split('.').pop() as string) === false) {
+          return;
         }
+        file.file.text().then((text) => {
+          if (IsRegex) {
+            const regex = new RegExp(TargetString, 'g');
+            const result = text.match(regex);
+            if (result) {
+              file.flag = true;
+            }
+          } else {
+            // eslint-disable-next-line no-lonely-if
+            if (text.includes(TargetString)) {
+              file.flag = true;
+            }
+          }
+        });
       });
     },
   },
