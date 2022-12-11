@@ -1,19 +1,32 @@
 <template>
   <div>
     <input ref="dir_selector" type="file" class="hidden" webkitdirectory @change="handleDirSelect" />
-    <b-button variant="outline-primary" @click="select_dir">ディレクトリを選択</b-button>
+    <b-button id="DirSelectButton" variant="outline-primary" @click="select_dir">ディレクトリを選択</b-button>
     <Explorer id="ExplorerContainer" :files="files" />
+    <b-button-group id="TabSwitcher">
+      <b-button variant="outline-success">Grep</b-button>
+      <b-button variant="outline-success">Result</b-button>
+    </b-button-group>
+    <div>
+      
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 
+enum TabState {
+  Grep,
+  Result,
+}
+
 export default Vue.extend({
   name: 'GrepPage',
   data() {
     return {
       files: [] as File[],
+      tab_state: TabState.Grep,
     };
   },
   methods: {
@@ -37,7 +50,7 @@ export default Vue.extend({
 .hidden {
   display: none;
 }
-button {
+#DirSelectButton {
   position: fixed;
   top: 1rem;
   left: 1rem;
@@ -49,5 +62,10 @@ button {
   left: 0;
   width: 300px;
   border: 3px double gray;
+}
+#TabSwitcher {
+  position: fixed;
+  top: 10px;
+  right: 10px;
 }
 </style>
