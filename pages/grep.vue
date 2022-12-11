@@ -2,7 +2,7 @@
   <div>
     <input ref="dir_selector" type="file" class="hidden" webkitdirectory @change="handleDirSelect" />
     <b-button variant="outline-primary" @click="select_dir">ディレクトリを選択</b-button>
-    <Explorer v-if="0 < files.length" :files="files" />
+    <Explorer id="ExplorerContainer" :files="files" />
   </div>
 </template>
 
@@ -38,6 +38,16 @@ export default Vue.extend({
   display: none;
 }
 button {
-  margin: 1rem;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+}
+#ExplorerContainer {
+  position: fixed;
+  top: 70px;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+  border: 3px double gray;
 }
 </style>

@@ -27,7 +27,6 @@ export default Vue.extend({
   padding: 0;
   max-width: 250px;
   overflow-x: auto;
-  border: 3px double gray;
 }
 .File {
   padding: 0.5rem 1rem;
