@@ -1,7 +1,7 @@
 <template>
   <div id="ExplorerDiv">
-    <h1>GREP</h1>
-    <p>{{ name }}</p>
+    <div v-for="file in files" :key="file.webkitRelativePath" class="File">
+    <div>{{ file.name }}</div></div>
   </div>
 </template>
 
@@ -10,6 +10,11 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'GrepPage',
-  props: ["name"],
+  props: {
+    files: {
+      type: Array as () => File[],
+      required: true,
+    },
+  },
 });
 </script>
