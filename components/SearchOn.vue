@@ -47,7 +47,8 @@ export default Vue.extend({
       this.selected_values = value;
     },
     grep_start(): void {
-      this.$emit('grep_start', this.selected_values);
+      const TargetExtentions = [...this.selected_values];
+      this.$emit('grep_start', TargetExtentions);
     },
   },
 });
